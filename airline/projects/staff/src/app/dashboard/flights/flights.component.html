@@ -1,0 +1,153 @@
+<div class="container">
+    <h1>Flights</h1>
+    <section>
+        <mat-form-field>
+            <mat-label>Select Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selDate">
+            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button (click)="getFlights()">Search</button>
+    </section>
+
+    <section>
+        <div *ngFor="let flight of flights; let fIndex= index ">
+            <div class="row">
+                <div class="col-4" style="cursor: pointer;color: #1c49e5;" (click)="getSeats(flight);cFlight=fIndex">
+                    {{flight.flight_name}}({{flight.flight_number}})</div>
+                <div class="col-4">{{flight.departure_airport}}
+                    <br />{{flight.departure_time}}
+                </div>
+                <div class="col-4"> {{flight.arrival_airport}}
+                    <br />
+                    {{flight?.arrival_time}}
+                </div>
+                <div class="col-12" *ngIf="cFlight == fIndex ">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2> Detail - {{flight.flight_name}}</h2>
+
+                        </div>
+
+                        <div class="col-4">
+                            <div style="height: 36px;" *ngFor="let r of [ ].constructor(row); let i = index">
+                                <ng-container *ngFor="let c of [ ].constructor(col); let j = index; ">
+                                    <span (click)="selectedSheet(i * col + j + 1)" class="seat" [ngClass]="{
+                                        'booked': isBooked(i * col + j + 1),
+                                        'showCursor': isBooked(i * col + j + 1),
+                                        
+                                        'selected': isSelected(i * col + j + 1)
+                                    }">
+                                        <i class="fa-solid fa-chair"></i>
+                                        {{ i * col + j + 1 }}
+                                    </span>
+                                </ng-container>
+                            </div>
+
+                        </div>
+                        <div class="col-8">
+                            <div>
+                                <span class="bg-booked" style="border: 3px solid red; border-radius: 10px;"> </span>
+                                -Booked
+                                <span class="bg-selected" style="border: 3px solid green; border-radius: 10px;">
+                                </span> -Selected
+                                <span class="bg-unused" style="border: 3px solid black; border-radius: 10px;">
+                                </span>- Un-Used
+                            </div>
+                            <div>
+
+
+                                @if(bookedSeatDetail && bookedSeatDetail[selelectdSheet]){
+                                <ng-container>
+                                    <h3> Sheet Already Allocated</h3>
+
+                                    <div><b>Name : </b>{{bookedSeatDetail[ selelectdSheet].passenger_name}}
+                                        ({{bookedSeatDetail[ selelectdSheet].passenger_email}})</div>
+                                    <div><b>Seat Number : </b>{{bookedSeatDetail[ selelectdSheet].seat_number}}</div>
+                                    <div><b>Checked In : </b>{{bookedSeatDetail[ selelectdSheet].is_checked_in ? 'YES':
+                                        'NO'}} </div>
+                                    <div><b>Requires Wheelchair : </b> {{bookedSeatDetail[
+                                        selelectdSheet].requires_wheelchair? 'YES':'NO'}}</div>
+                                    <div><b>Has Infant : </b> {{bookedSeatDetail[ selelectdSheet].has_infant?
+                                        'YES':'NO'}}
+                                    </div>
+                                    <div><b>Flight Name : </b> {{bookedSeatDetail[ selelectdSheet].flight_name}} ,
+                                        {{bookedSeatDetail[ selelectdSheet].flight_number}}</div>
+                                    <div><b>Departure Time : </b> {{bookedSeatDetail[ selelectdSheet].departure_time}}
+                                    </div>
+                                    <div><b>Arrival Time : </b> {{bookedSeatDetail[ selelectdSheet].arrival_time}}</div>
+                                    <div><b>Departure Airport : </b> {{bookedSeatDetail[
+                                        selelectdSheet].departure_airport}}
+                                    </div>
+                                    <div><b>Arrival Airport : </b> {{bookedSeatDetail[ selelectdSheet].arrival_airport
+                                        }}
+                                    </div>
+                                </ng-container>
+                                } @else if(selelectdSheet != -1){
+
+                                <ng-container #TempBookSheet>
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <h3>Book New Sheet</h3>
+                                            <hr />
+                                            Select No - {{selelectdSheet}} <br>
+                                        </div>
+                                        <div class="col-12">
+                                            <mat-form-field>
+                                                <mat-label>Name</mat-label>
+                                                <input matInput type="text" [(ngModel)]="bookSeat.name">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <mat-form-field>
+                                                <mat-label>Email</mat-label>
+                                                <input matInput type="email" [(ngModel)]="bookSeat.email">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-12">
+                                            <!-- <mat-form-field> -->
+                                            <!-- <mat-label>is wheel-chair requires</mat-label> -->
+                                            <mat-checkbox [(ngModel)]="bookSeat.requires_wheelchair">is wheel-chair
+                                                requires</mat-checkbox>
+                                        </div>
+                                        <div class="col-12">
+                                            <mat-checkbox [(ngModel)]="bookSeat.has_infant">Has Infant </mat-checkbox>
+                                        </div>
+                                        <div class="col-12">
+                                            <button mat-raised-button type="button" class="btn-primary"
+                                                (click)="bookSeatFun()">Book Sheet</button>
+                                        </div>
+                                    </div>
+                                    <!-- <input matInput type="text" [(ngModel)]="bookSeat.requires_wheelchair" > -->
+                                    <!-- </mat-form-field> -->
+                                    <!-- 
+                                    <div>Name <input  type="text" [(ngModel)]="bookSeat.name" /></div>
+                                    <div>Email <input type="email" [(ngModel)]="bookSeat.email" /></div>
+                                    <div>is wheel-chair requires <input type="checkbox"
+                                            [(ngModel)]="bookSeat.requires_wheelchair" /></div>
+                                    <div>Has Infant <input type="checkbox" [(ngModel)]="bookSeat.has_infant" /></div> -->
+
+                                    <hr />
+
+                                </ng-container>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>

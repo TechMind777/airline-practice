@@ -1,0 +1,38 @@
+<form [formGroup]="frmAncillary" (ngSubmit)="AddUpdate(frmAncillary.value)">
+
+    <mat-dialog-content class="mat-typography">
+        <h4> {{ancillaryData?'Update':'Add'}} Ancillary </h4> 
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field>
+                    <mat-label>service_name</mat-label>
+                    <input matInput type="text" formControlName="service_name">
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field>
+                    <mat-label>description</mat-label>
+                    <input matInput type="text" formControlName="description">
+                </mat-form-field>
+            </div>
+
+            <div class="col-12">
+                <mat-form-field>
+                    <mat-label>price</mat-label>
+                    <input matInput type="text" formControlName="price">
+                </mat-form-field>
+            </div>
+
+            <mat-checkbox>Active</mat-checkbox>
+            <!-- <button mat-raised-button type="submit">Add</button> -->
+
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+
+
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-button cdkFocusInitial type="submit">{{ancillaryData?'Update':'Add'}}</button>
+
+    </mat-dialog-actions>
+</form>

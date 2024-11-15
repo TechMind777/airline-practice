@@ -1,0 +1,47 @@
+label input[type="radio"] {
+    cursor: pointer;
+}
+
+.booked {
+    color: green;
+}
+  
+.unused {
+    color: black;
+}
+
+.used-disabled {
+    color: red;
+    cursor: not-allowed !important;
+}
+
+.bg-unused {
+    background-color: black;
+}
+
+.showCursor {
+    cursor: not-allowed;
+}
+
+
+.seat {
+    cursor: pointer;
+    padding: 4px 1px 4px 9px;
+    margin: 6px;
+    border: 1px solid;
+    border-radius: 13px;
+  }
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }
+
+  .line_height_30{
+    line-height: 30px;
+  }

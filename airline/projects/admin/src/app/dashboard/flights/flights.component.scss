@@ -1,0 +1,35 @@
+.booked {
+    color: red; 
+  }
+  .bg-booked {
+    background-color: red;  
+  }
+  
+  .selected {
+    color: green;
+  }
+  
+  .bg-selected {
+    background-color: green;
+  }
+
+  .unused {
+    color: black;
+  }
+
+  .bg-unused {
+    background-color: black;
+  }
+
+  .showCursor{
+    cursor: not-allowed;
+  }
+
+
+  .seat {
+    cursor: pointer;
+    padding: 4px 1px 4px 9px;
+    margin: 6px;
+    border: 1px solid;
+    border-radius: 13px;
+  }

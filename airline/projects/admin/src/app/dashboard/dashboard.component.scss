@@ -1,0 +1,32 @@
+.responsive-container {
+    position: relative;
+    top: 55px;
+    padding: 15px;
+    
+    // z-index: -1;
+
+  }
+  /* Small devices (up to 576px) */
+@media (max-width: 576px) {
+    .responsive-container {
+      top: 200px;
+      padding: 5px;
+    }
+  }
+  
+  /* Medium devices (577px to 768px) */
+  @media (min-width: 577px) and (max-width: 768px) {
+    .responsive-container {
+      top: 200px;
+      padding: 10px;
+    }
+  }
+  
+  /* Large devices (769px and above) */
+  @media (min-width: 769px) {
+    .responsive-container {
+      top: 55px;
+      padding: 15px;
+    }
+  }
+  

@@ -1,0 +1,74 @@
+<mat-dialog-content class="mat-typography">
+    <h5>Passenger Detail</h5>
+    <hr />
+    <!-- {{passengerData|json}} -->
+
+
+    @if(passengerData.is_checked_in){
+
+    <span class="check-in">check-in</span>
+    } @else{
+    <span class="check-out">check-out</span>
+    }
+    <hr />
+
+    <div class="row">
+    <div class="col-12">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput type="text" [(ngModel)]="passengerData.name"  >
+        </mat-form-field>
+    </div>
+    
+    <div class="col-12">
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="text" [(ngModel)]="passengerData.email"  >
+        </mat-form-field>
+    </div> 
+    <div class="col-12">
+        <mat-form-field>
+            <mat-label>Passport</mat-label>
+            <input matInput type="text" [(ngModel)]="passengerData.passport"  >
+        </mat-form-field>
+    </div> 
+    <div class="col-12">
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput type="text" [(ngModel)]="passengerData.address"  >
+        </mat-form-field>
+    </div> 
+    <div class="col-12">
+        
+        <mat-form-field>
+            <mat-label>Date Of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="passengerData.date_of_birth">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+ 
+    </div>
+</div> 
+    <b>Requires Wheelchair</b>: {{passengerData.requires_wheelchair?'YES':'NO'}} <br />
+    <!-- <b>Passport</b>: {{passengerData.passport}} <br /> -->
+    <!-- <b>Address</b>: {{passengerData.address}} <br /> -->
+    <!-- <b>Date Of Birth</b>: {{passengerData.date_of_birth}} <br /> -->
+    <!-- <b>seat_id</b>: {{passengerData.seat_id}} <br/> -->
+    <b>Seat Number</b>: {{passengerData.seat_number}} <br />
+    <b>Shop Requests</b>: {{passengerData.shop_requests?'YES':'NO'}} <br />
+    <b>Has Infant</b>: {{passengerData.has_infant?'YES':'NO'}} <br />
+
+    <!-- <b>ancillary_services</b>: {{passengerData.ancillary_services}} <br/> -->
+    <!-- <b>meal_preferences</b>: {{passengerData.meal_preferences}} <br/> -->
+    <!-- <b>flight_id</b>: {{passengerData.flight_id}} <br/> -->
+    <b>Ancillary Services </b>: {{passengerData.ancillary_services_name}} <br />
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+
+
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button cdkFocusInitial (click)="updateSeatDetail()" > Update Detail </button>
+
+</mat-dialog-actions>

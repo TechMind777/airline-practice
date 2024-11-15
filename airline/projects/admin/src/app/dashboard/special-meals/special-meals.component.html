@@ -1,0 +1,37 @@
+<div>
+    <h3>Meals <button mat-raised-button (click)="openDialog(null)" style="float: right;">Add</button></h3>
+    <hr />
+
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="table-responsive">
+
+            <table class="ctbl">
+
+                <thead>
+                    <tr>
+                        <td>S.No</td>
+                        <td>service_name</td>
+                        <td>price</td>
+                        <td>description</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of mealsData;let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{a.meal_type}}</td>
+                        <td>{{a.price}}</td>
+                        <td>{{a.description}}</td>
+                        <td> <button mat-raised-button (click)="edit(a)">Edit</button></td>
+                    </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    </div>
+</div>

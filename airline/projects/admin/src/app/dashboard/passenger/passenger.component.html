@@ -1,0 +1,131 @@
+<div class="container">
+
+    <h3>Passenger List</h3>
+    <hr />
+    <div>
+        <section>
+            <h3>Filter</h3>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Select an option</mat-label>
+                        <mat-select [(value)]="fillter.flight_id">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let flight of flights; let fIndex= index "
+                                [value]="flight.id">{{flight.flight_name}}({{flight.flight_number}})</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" [(ngModel)]="fillter.name">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-4">
+                    <mat-checkbox [(ngModel)]="fillter.requires_wheelchair">Wheel Chair </mat-checkbox>
+                    <mat-checkbox [(ngModel)]="fillter.has_infant">Has Infant </mat-checkbox>
+                </div>
+
+                <div class="col-sm-12 col-md-3 col-lg-6">
+
+
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button value="-1" [(ngModel)]="fillter.is_checked_in">Both </mat-radio-button>
+                        <mat-radio-button value="0" [(ngModel)]="fillter.is_checked_in">check-in </mat-radio-button>
+                        <mat-radio-button value="1" [(ngModel)]="fillter.is_checked_in">check-out</mat-radio-button>
+                        <!-- <mat-radio-button value="2">Option 2</mat-radio-button> -->
+                    </mat-radio-group>
+
+                </div>
+
+                <div class="col-sm-12 col-md-3 col-lg-4">
+                    <mat-checkbox [(ngModel)]="fillter.passport_mis" value="1">Wheel Chair Missing </mat-checkbox>
+                    <mat-checkbox [(ngModel)]="fillter.address_mis" value="1">Address Missing </mat-checkbox>
+                    <mat-checkbox [(ngModel)]="fillter.date_of_birth_mis" value="1">Date Of Birth Missing
+                    </mat-checkbox>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-1"><button mat-raised-button
+                        (click)="getPassengers()">Search</button></div>
+
+            </div>
+        </section>
+
+        <hr>
+        <!-- <label> <input type="checkbox" [(ngModel)]="fillter.requires_wheelchair"> Wheel Chair</label>
+        <label> <input type="checkbox" [(ngModel)]="fillter.has_infant"> Infant</label> -->
+        <!-- <button (click)="getPassengers()"> Filtter</button> -->
+
+        <!-- <div>
+            <label> <input type="radio" name="check" value="-1" [(ngModel)]="fillter.is_checked_in">Both </label>
+            <label> <input type="radio" name="check" value="0" [(ngModel)]="fillter.is_checked_in">check-in </label>
+            <label> <input type="radio" name="check" value="1" [(ngModel)]="fillter.is_checked_in"> check-out</label>
+        </div> -->
+
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> name </th>
+                            <th> ancillary services </th>
+                            <!-- <th> infant </th> -->
+                            <th> seat number </th>
+                            <th> Check-in</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of passengersData?.row">
+                            <td>{{p.name}}</td>
+                            <td>{{p.ancillary_services_name }}</td>
+                            <!-- <td>{{p.has_infant?'YES':'NO'}}</td> -->
+                            <td>
+                                <button mat-raised-button
+                                    (click)="openDialog(p, '0ms', '0ms')">{{p.seat_number}}</button>
+                            </td>
+                            <td>
+
+                                <app-switch-button [(isChecked)]="p.is_checked_in"
+                                    (isCheckedChange)="check($event, p.seat_id)">
+
+                                </app-switch-button>
+                                <!-- <app-switch-button [isChecked]="p.is_checked_in" (isCheckedChange)="check($event)"></app-switch-button> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <div style="float: right;">
+                                    <button class="full-width" mat-flat-button
+                                        [disabled]="passengersData.pre?  false: true "
+                                        (click)=" change(-1); ">Pre</button>
+
+                                    <button class="full-width" mat-flat-button
+                                        [disabled]="passengersData.next?  false: true "
+                                        (click)=" change(1); ">Next</button>
+
+                                </div>
+                                <!-- <button class="btn btn-primary" [disabled]="passengersData.pre?  false: true "
+                                (click)=" change(-1); ">Pre</button>
+                            <button class="btn btn-primary" [disabled]="passengersData.next?  false: true "
+                                (click)="change(1);">Next</button></div> -->
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
