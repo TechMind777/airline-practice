@@ -1,0 +1,56 @@
+Setting up for a multi-project workspace
+
+    ng new airline --no-create-application
+
+    ng generate application staff --no-standalone
+    ng generate application admin --no-standalone
+    ng generate library admin
+
+    ng serve staff --port 4200
+    ng serve admin --port 4300
+
+
+    ng generate serve rest --project staff
+    ng generate serve global --project staff
+
+    
+
+    ng g module dashboard --route dashboard --module app.module --project staff
+    ng g module dashboard --route dashboard --module app.module --project admin
+
+    ng g module dashboard/flights --route flights --module dashboard.module --project staff
+    ng g module dashboard/flights --route flights --module dashboard.module --project staff
+    ng g module dashboard/passenger --route passenger --module dashboard.module --project staff
+
+    ng generate component components/switch-button  --project staff
+    ng generate component components/seat-detail  --project staff
+
+    ng g module login --route login --module app.module --project staff
+    ng g module login --route login --module app.module --project admin
+
+    ng add @ng-bootstrap/ng-bootstrap --project staff
+
+    ng generate component components/add_ancillary_services  --project admin
+    ng generate component components/add_special_meals  --project admin
+    ng generate component components/passenger  --project admin
+
+
+    ng g module dashboard/ancillary_services --route ancillary_services --module dashboard.module --project admin
+    ng g module dashboard/special_meals --route special_meals --module dashboard.module --project admin
+    ng g module dashboard/shopping_items --route shopping_items --module dashboard.module --project admin
+
+    ng g module dashboard/flights --route flights --module dashboard.module --project admin
+    ng g module dashboard/passenger --route passenger --module dashboard.module --project admin
+
+     ancillary_services, special_meals, shopping_items 
+
+
+    ng test --project staff 
+ 
+    ng test --project staff --include='projects/staff/src/app/login/login.component.spec.ts'
+
+ 
+
+
+
+
